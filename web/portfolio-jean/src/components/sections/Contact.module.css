@@ -1,0 +1,228 @@
+.contactContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contactTitle {
+    font-size: var(--text-3xl);
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-sm);
+    text-align: center;
+}
+
+.contactText {
+    color: var(--color-gray-600);
+    line-height: 1.8;
+    font-size: var(--text-lg);
+    text-align: center;
+}
+
+.contactDetails {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-xl);
+}
+
+.contactItem {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+}
+
+.contactIcon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.contactItem h4 {
+    font-size: var(--text-base);
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+.contactItem p,
+.contactItem a {
+    color: var(--color-gray-600);
+    margin: 0;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.contactItem a:hover {
+    color: var(--color-primary);
+}
+
+.socialLinks {
+    text-align: center;
+}
+
+.socialLinks h4 {
+    font-size: var(--text-lg);
+    color: var(--color-secondary);
+    margin-bottom: var(--spacing-md);
+}
+
+.socialIcons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+.socialLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--color-gray-100);
+    border-radius: var(--radius-md);
+    color: var(--color-gray-700);
+    transition: all var(--transition-base);
+}
+
+.socialLink:hover {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: var(--color-white);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* Floating Contact Button */
+.floatingContact {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+}
+
+.floatingButton {
+    padding: var(--spacing-md) var(--spacing-xl);
+    min-width: 160px;
+    height: 60px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: var(--color-white);
+    border: none;
+    font-size: var(--text-lg);
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(220, 20, 60, 0.4);
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.floatingButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(220, 20, 60, 0.6);
+}
+
+.floatingButton.active {
+    transform: rotate(90deg);
+}
+
+.contactOptions {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.contactOption {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-lg);
+    background: var(--color-white);
+    border: 2px solid var(--color-gray-200);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: var(--shadow-md);
+    min-width: 150px;
+}
+
+.contactOption:hover {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    border-color: var(--color-primary);
+    transform: translateX(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.contactOption:hover .optionIcon,
+.contactOption:hover .optionText {
+    color: var(--color-white);
+}
+
+.optionIcon {
+    font-size: 24px;
+    transition: color var(--transition-base);
+}
+
+.optionText {
+    font-size: var(--text-base);
+    font-weight: 600;
+    color: var(--color-secondary);
+    transition: color var(--transition-base);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contactDetails {
+        grid-template-columns: 1fr;
+    }
+
+    .floatingContact {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .floatingButton {
+        min-width: 140px;
+        height: 50px;
+        font-size: var(--text-base);
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+
+    .contactOptions {
+        bottom: 70px;
+    }
+
+    .contactOption {
+        padding: var(--spacing-sm) var(--spacing-md);
+        min-width: 130px;
+    }
+
+    .optionIcon {
+        font-size: 20px;
+    }
+
+    .optionText {
+        font-size: var(--text-sm);
+    }
+}
