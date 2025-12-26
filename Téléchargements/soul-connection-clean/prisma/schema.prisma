@@ -1,0 +1,140 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// User model for coaches and managers
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      String   @default("COACH")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  clients   Client[]
+  meetings  Meeting[]
+  payments  Payment[]
+  events    Event[]
+
+  @@map("users")
+}
+
+// Client model
+model Client {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  status    String   @default("ACTIVE")
+  imageUrl  String?
+  birthDate DateTime?
+  zodiacSign String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  coachId   String
+  coach     User     @relation(fields: [coachId], references: [id], onDelete: Cascade)
+  
+  meetings  Meeting[]
+  payments  Payment[]
+  tips      Tip[]
+
+  @@map("clients")
+}
+
+// Meeting model
+model Meeting {
+  id        String   @id @default(cuid())
+  title     String
+  description String?
+  startTime DateTime
+  endTime   DateTime
+  location  String?
+  type      String   @default("coaching")
+  status    String   @default("SCHEDULED")
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  coachId   String
+  coach     User     @relation(fields: [coachId], references: [id], onDelete: Cascade)
+
+  @@map("meetings")
+}
+
+// Payment model
+model Payment {
+  id        String   @id @default(cuid())
+  amount    Float
+  currency  String   @default("EUR")
+  status    String   @default("PENDING")
+  method    String   @default("bank_transfer")
+  notes     String?
+  dueDate   DateTime?
+  paidAt    DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  coachId   String
+  coach     User     @relation(fields: [coachId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+// Event model
+model Event {
+  id        String   @id @default(cuid())
+  title     String
+  description String?
+  startDate DateTime
+  endDate   DateTime
+  location  String?
+  capacity  Int?
+  eventType String   @default("workshop")
+  status    String   @default("SCHEDULED")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  coachId   String
+  coach     User     @relation(fields: [coachId], references: [id], onDelete: Cascade)
+
+  @@map("events")
+}
+
+// Coaching tips model
+model Tip {
+  id        String   @id @default(cuid())
+  title     String
+  content   String
+  category  String   @default("general")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("tips")
+}

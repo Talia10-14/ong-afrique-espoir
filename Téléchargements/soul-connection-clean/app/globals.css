@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    /* Couleur principale plus vive - rose vif */
+    --primary: 335 90% 55%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Couleur secondaire - bleu vif */
+    --secondary: 210 100% 50%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Couleur d'accentuation - violet */
+    --accent: 270 76% 55%;
+    --accent-foreground: 0 0% 98%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 335 90% 55%;
+
+    --radius: 0.75rem;
+
+    /* Couleurs pour les graphiques */
+    --chart-1: hsl(335, 90%, 55%);
+    --chart-2: hsl(210, 100%, 50%);
+    --chart-3: hsl(270, 76%, 55%);
+    --chart-4: hsl(150, 80%, 45%);
+    --chart-5: hsl(30, 90%, 55%);
+
+    /* Couleurs pour la sidebar */
+    --sidebar: 0 0% 100%;
+    --sidebar-foreground: 240 10% 3.9%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-accent: 335 90% 95%;
+    --sidebar-accent-foreground: 335 90% 55%;
+    --sidebar-ring: 335 90% 55%;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+
+    /* Couleurs vives adaptées pour le mode sombre */
+    --primary: 335 80% 65%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 90% 60%;
+    --secondary-foreground: 0 0% 98%;
+
+    --accent: 270 70% 65%;
+    --accent-foreground: 0 0% 98%;
+
+    --card: 240 10% 7%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 7%;
+    --popover-foreground: 0 0% 98%;
+
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --destructive: 0 62.8% 50.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 335 80% 65%;
+
+    /* Couleurs pour les graphiques en mode sombre */
+    --chart-1: hsl(335, 80%, 65%);
+    --chart-2: hsl(210, 90%, 60%);
+    --chart-3: hsl(270, 70%, 65%);
+    --chart-4: hsl(150, 70%, 55%);
+    --chart-5: hsl(30, 80%, 65%);
+
+    /* Couleurs pour la sidebar en mode sombre */
+    --sidebar: 240 10% 5%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-accent: 335 70% 25%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-ring: 335 80% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .gradient-card {
+    @apply relative overflow-hidden;
+  }
+
+  .gradient-card::before {
+    content: "";
+    @apply absolute inset-0 bg-gradient-diagonal from-primary/20 to-secondary/20 opacity-70 pointer-events-none;
+  }
+
+  .animated-border {
+    @apply relative;
+  }
+
+  .animated-border::after {
+    content: "";
+    @apply absolute inset-0 rounded-lg border-2 border-primary/50 pointer-events-none;
+    animation: pulse 2s infinite;
+  }
+
+  .stat-card {
+    @apply relative overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
+  }
+
+  .stat-card::before {
+    content: "";
+    @apply absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-accent/20 rounded-xl blur opacity-50 group-hover:opacity-75 transition duration-300;
+  }
+
+  /* Styles spécifiques au mode sombre */
+  .dark .gradient-card::before {
+    @apply opacity-30;
+  }
+
+  .dark .stat-card::before {
+    @apply opacity-30;
+  }
+
+  /* Effet de lueur pour le mode sombre */
+  .dark .glow-effect {
+    @apply relative;
+  }
+
+  .dark .glow-effect::after {
+    content: "";
+    @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+    box-shadow: 0 0 15px 2px rgba(var(--primary-rgb), 0.3);
+  }
+
+  .dark .glow-effect:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Variables RGB pour les effets de lueur */
+  .dark {
+    --primary-rgb: 255, 105, 180;
+    --secondary-rgb: 30, 144, 255;
+    --accent-rgb: 186, 85, 211;
+  }
+}
