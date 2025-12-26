@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  /* Terra Design System Colors */
+  --color-terra-green: #2E7D32;
+  --color-terra-blue: #1565C0;
+  --color-terra-yellow: #FBC02D;
+  --color-terra-coral: #FF7043;
+  --color-terra-light: #F5F5F5;
+  --color-terra-dark: #1A202C;
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-body: var(--font-roboto);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #1A202C; /* terra-dark */
+  --font-inter: "Inter", sans-serif; /* Fallback */
+  --font-roboto: "Roboto", sans-serif; /* Fallback */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+}

@@ -1,0 +1,16 @@
+{
+  "admins": [
+    {
+      "email": "admin@afrique-espoir.org",
+      "passwordHash": "$2a$10$...", 
+      "name": "Administrateur Principal",
+      "role": "super_admin"
+    },
+    {
+      "email": "moderateur@afrique-espoir.org",
+      "passwordHash": "$2a$10$...",
+      "name": "Modérateur",
+      "role": "moderator"
+    }
+  ]
+}
