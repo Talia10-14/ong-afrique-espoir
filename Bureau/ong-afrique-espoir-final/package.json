@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "create-admin": "tsx scripts/create-admin.ts",
     "list-admins": "tsx scripts/list-admins.ts",
     "hash-password": "node scripts/hash-password.js"
